@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment=Plasmoid for controling backlight.
+Encoding=UTF-8
+Icon=redshift
+Name=EasyBright - set backlight of screen easy
+Type=Service
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Jiri.one
+X-KDE-PluginInfo-Category=Graphics
+X-KDE-PluginInfo-Email=nemec@jiri.one
+X-KDE-PluginInfo-License=GPL2
+X-KDE-PluginInfo-Name=com.github.EasyBright
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=https://github.com/jiri-one/easybright_plasmoid
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-NotificationArea=true
+X-Plasma-RemoteLocation=
