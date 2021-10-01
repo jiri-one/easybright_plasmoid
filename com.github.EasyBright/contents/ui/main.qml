@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import Qt.WebSockets 1.0
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -8,30 +8,25 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 PlasmaCore.IconItem {
     id: icon
 
+    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+
     property int counterNum: 0
     property int step: 5
-
-    active: mouseArea.containsMouse
 
     PlasmaComponents.Label {
         id: counter
         text: counterNum.toString()
         anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
         fontSizeMode: Text.Fit
-        font.pointSize: counter.height
+        font.pixelSize: 30
     }
 
 
     MouseArea {
         id: mouseArea
-
-        //property bool wasExpanded: false
-
         anchors.fill: parent
-        hoverEnabled: true
-//        onPressed: wasExpanded = plasmoid.expanded
-//        onClicked: plasmoid.expanded = !wasExpanded
 
         onWheel: {
             if (wheel.angleDelta.y > 0)
@@ -52,14 +47,13 @@ PlasmaCore.IconItem {
         onNewData: {
             //socket_reconnect()
             counterNum = data.stdout;
-            console.log("")
         }
     }
 
     PlasmaCore.DataSource {
         id: ds_socket_server
         engine: 'executable'
-        connectedSources: ["contents/websocket_server.py"]
+        connectedSources: ["~/.local/share/plasma/plasmoids/com.github.EasyBright/contents/scripts/websocket_server.py"]
     }
 
  function socket_reconnect() {
