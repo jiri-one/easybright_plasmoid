@@ -12,8 +12,18 @@ Type=PlasmoidLauncherType
 
 [Launch][Launch Configuration 0][Data]
 Arguments=--formfactor,planar
+Break on Start=false
 Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
-PlasmoidIdentifier=org.kde.EasyBright
+LLDB Arguments=
+LLDB Config Script=
+LLDB Environment=
+LLDB Executable=
+LLDB Inherit System Env=true
+LLDB Remote Debugging=false
+LLDB Remote Path=
+LLDB Remote Server=
+PlasmoidIdentifier=com.github.EasyBright
+Start With=ApplicationOutput
 
 [Project]
 VersionControlSupport=kdevgit

@@ -10,39 +10,7 @@ PlasmaCore.IconItem {
 
     property int counterNum: 0
     property int step: 5
-    property string konzole: "test"
 
-    readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
-        || plasmoid.location === PlasmaCore.Types.RightEdge
-        || plasmoid.location === PlasmaCore.Types.BottomEdge
-        || plasmoid.location === PlasmaCore.Types.LeftEdge)
-
-    Layout.minimumWidth: {
-        switch (plasmoid.formFactor) {
-        case PlasmaCore.Types.Vertical:
-            return 0;
-        case PlasmaCore.Types.Horizontal:
-            return height;
-        default:
-            return PlasmaCore.Units.gridUnit * 3;
-        }
-    }
-
-    Layout.minimumHeight: {
-        switch (plasmoid.formFactor) {
-        case PlasmaCore.Types.Vertical:
-            return width;
-        case PlasmaCore.Types.Horizontal:
-            return 0;
-        default:
-            return PlasmaCore.Units.gridUnit * 3;
-        }
-    }
-
-    Layout.maximumWidth: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1;
-    Layout.maximumHeight: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1;
-
-    source: plasmoid.icon ? plasmoid.icon : "plasma"
     active: mouseArea.containsMouse
 
     PlasmaComponents.Label {
@@ -84,13 +52,14 @@ PlasmaCore.IconItem {
         onNewData: {
             //socket_reconnect()
             counterNum = data.stdout;
+            console.log("")
         }
     }
 
     PlasmaCore.DataSource {
         id: ds_socket_server
         engine: 'executable'
-        connectedSources: ["python /home/jiri/Workspace/EasyBright/easybright_plasmoid/org.kde.EasyBright/contents/handlers/websocket_server.py"]
+        connectedSources: ["contents/websocket_server.py"]
     }
 
  function socket_reconnect() {
@@ -101,14 +70,14 @@ PlasmaCore.IconItem {
     WebSocket {
         id: socket
         url: "ws://localhost:8888"
-        active: true
+        active: false
         //onTextMessageReceived: {
             //counterNum = message
         //}
         onStatusChanged: if (socket.status == WebSocket.Error) {
                              console.log("Error: " + socket.errorString)
                          } else if (socket.status == WebSocket.Open) {
-                             socket.sendTextMessage(counter.text)
+                             socket.sendTextMessage(counterNum)
                          }
     }
 

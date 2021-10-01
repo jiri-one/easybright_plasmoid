@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from asyncio import Future, run, sleep
 from websockets import serve
 from subprocess import Popen, PIPE
