@@ -13,6 +13,16 @@ PlasmaCore.IconItem {
     property int counterNum: 0
     property int step: 5
 
+    function round_to_nearest_five(number) {
+        return number = number-(number%5);
+    }
+
+    onCounterNumChanged: {
+        counterNum = round_to_nearest_five(counterNum)
+        socket_reconnect()
+    }
+
+
     PlasmaComponents.Label {
         id: counter
         text: counterNum.toString()
